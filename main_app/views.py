@@ -3,9 +3,19 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-    name = 'Gold Nugget'
-    value = 1000.00
-    context = {'treasure_name': name,
-               'treasure_val': value}
+    return render(request, 'index.html', {'treasures': treasures})
 
-    return render(request, 'index.html', context)
+
+class Treasure:
+    def __init__(self, name, value, material, location, img_url):
+        self.name = name
+        self.value = value
+        self.material = material
+        self.location = location
+        self.img_url = img_url
+
+treasures = [
+    Treasure('Gold Nugget', 500.00, 'gold', "Curly's Creek, NM", 'https://s3.amazonaws.com/courseware.codeschool.com/try_django/images/treasuregram-gold-nugget.png'),
+    Treasure("Fool's Gold", 0, 'pyrite', "Fool's Fall, CO", 'https://s3.amazonaws.com/courseware.codeschool.com/try_django/images/treasuregram-fools-gold.png'),
+    Treasure('Coffee Can', 20.00, 'tin', 'Acme, CA', 'https://s3.amazonaws.com/courseware.codeschool.com/try_django/images/treasuregram-coffee-can.png')
+]
